@@ -9,13 +9,14 @@ import java.time.DayOfWeek
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-@DataContextMarker
 object schedule {
 
-    operator fun invoke(init: schedule.() -> Unit) {
-        this.init()
-    }
+    operator fun invoke(init: SchedulingContext.() -> Unit) = SchedulingContext().init()
 
+}
+
+@DataContextMarker
+class SchedulingContext {
     fun data(init: DataContext.() -> Unit) : SchedulingResults {
         val context = DataContext().apply(init)
         val dataSet = context.buildDataSet()
