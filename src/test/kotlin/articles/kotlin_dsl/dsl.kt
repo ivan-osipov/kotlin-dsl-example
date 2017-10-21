@@ -15,7 +15,7 @@ object schedule {
 
 }
 
-@DataContextMarker
+@MyCustomDslMarker
 class SchedulingContext {
     fun data(init: DataContext.() -> Unit) : SchedulingResults {
         val context = DataContext().apply(init)
@@ -25,7 +25,7 @@ class SchedulingContext {
     }
 }
 
-@DataContextMarker
+@MyCustomDslMarker
 class DataContext {
 
     private val subjects = ArrayList<Subject>()
@@ -118,10 +118,10 @@ class AssertionsContext(val scheduledEvents: Set<Event>)
 
 infix fun SchedulingResults.assertions(init: AssertionsContext.() -> Unit) = AssertionsContext(this.scheduledEvents).init()
 
-infix fun <T> T.shouldNotEqual(expected: T?) {
+infix fun <T : Any?> T.shouldNotEqual(expected: T) {
     Assert.assertThat(this, not(equalTo(expected)))
 }
 
-infix fun <T> T.shouldEqual(expected: T?) {
+infix fun <T : Any?> T.shouldEqual(expected: T) {
     Assert.assertThat(this, equalTo(expected))
 }
