@@ -1,7 +1,7 @@
-package articles.kotlin_dsl
+package kotlin_dsl
 
-import articles.kotlin_dsl.scheduler.Scheduler
-import articles.kotlin_dsl.scheduler.SchedulingResults
+import kotlin_dsl.scheduler.Scheduler
+import kotlin_dsl.scheduler.SchedulingResults
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.not
 import org.junit.Assert

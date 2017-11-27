@@ -1,6 +1,6 @@
-package articles.kotlin_dsl.scheduler
+package kotlin_dsl.scheduler
 
-import articles.kotlin_dsl.*
+import kotlin_dsl.*
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet

@@ -1,4 +1,4 @@
-package articles.kotlin_dsl
+package kotlin_dsl
 
 open class Matrix<T>(val width: Int, val height: Int, init: (Int, Int) -> T) {
     private val content: List<MutableList<T>>

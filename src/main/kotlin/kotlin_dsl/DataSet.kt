@@ -1,4 +1,4 @@
-package articles.kotlin_dsl
+package kotlin_dsl
 
 class DataSet {
 
