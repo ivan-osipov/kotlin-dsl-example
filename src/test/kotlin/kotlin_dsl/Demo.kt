@@ -36,7 +36,7 @@ class Demo {
             teacher {
                 subjectIndexes(2, 3)
                 availability {
-                    thursday("08:00") + sameDay("11:00") + sameDay("14:00")
+                    thursday("08:00") + time("11:00") + time("14:00")
                 }
             }
 

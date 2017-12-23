@@ -17,7 +17,7 @@ object schedule {
 
 @MyCustomDslMarker
 class SchedulingContext {
-    fun data(init: DataContext.() -> Unit) : SchedulingResults {
+    fun data(init: DataContext.() -> Unit): SchedulingResults {
         val context = DataContext().apply(init)
         val dataSet = context.buildDataSet()
         val scheduler = Scheduler()
@@ -87,22 +87,14 @@ class DataContext {
 
     fun AvailabilityTable.sunday(from: String, to: String? = null) = day(DayOfWeek.SUNDAY, from, to)
 
-    fun AvailabilityTable.day(dayOfWeek: DayOfWeek, from: String, to: String? = null) : Pair<AvailabilityTable, DayOfWeek> {
-        for (lessonIndex in sameDay(from, to)) {
+    fun AvailabilityTable.day(dayOfWeek: DayOfWeek, from: String, to: String? = null): DayPointer {
+        for (lessonIndex in time(from, to)) {
             this[dayOfWeek.ordinal, lessonIndex] = true
         }
-        return Pair(this, dayOfWeek)
+        return DayPointer(this, dayOfWeek)
     }
 
-    operator fun Pair<AvailabilityTable, DayOfWeek>.plus(lessonIndexRange: IntRange) : Pair<AvailabilityTable, DayOfWeek> {
-        val (table, dayOfWeek) = this
-        for (lessonIndex in lessonIndexRange) {
-            table[dayOfWeek.ordinal, lessonIndex] = true
-        }
-        return this
-    }
-
-    fun sameDay(from: String, to: String? = null) : IntRange {
+    fun time(from: String, to: String? = null): IntRange {
         val fromTime = LocalTime.from(DateTimeFormatter.ISO_LOCAL_TIME.parse(from))
         val toTime = to?.let { LocalTime.from(DateTimeFormatter.ISO_LOCAL_TIME.parse(to)) } ?: fromTime.plusHours(1)
         val secondsFromStart = fromTime.toSecondOfDay() - startTime.toSecondOfDay()
@@ -112,6 +104,17 @@ class DataContext {
         return startLessonIndex..endLessonIndex
     }
 
+}
+
+data class DayPointer(val availabilityTable: AvailabilityTable,
+                      val dayOfWeek: DayOfWeek) {
+    operator fun plus(lessonIndexRange: IntRange): DayPointer {
+        val (table, dayOfWeek) = this
+        for (lessonIndex in lessonIndexRange) {
+            table[dayOfWeek.ordinal, lessonIndex] = true
+        }
+        return this
+    }
 }
 
 class AssertionsContext(val scheduledEvents: Set<Event>)
