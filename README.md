@@ -12,6 +12,6 @@ Folder `src/test/kotlin/kotlin_dsl` contains follow files:
 Folder `src/main/kotlin/kotlin_dsl` contains follow files:
 
 - model.kt which contains a whole domain model of this example
-- Matrix.kt is wrapper for two-dimensional array
+- Matrix.kt is wrapper for a two-dimensional array
 - DataSet.kt is a container which encapsulate data for the scheduler
-- scheduler subpackage contains a simple scheduler implementation
+- scheduler subpackage contains a dummy scheduler implementation
