@@ -1,4 +1,6 @@
-Kotlin DSL Example
+# Kotlin DSL Example
+
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 This project is an example of Kotlin DSL building. Here you'll find examples of different features usage.
 The domain of this example is building of schedule for teachers and students.
